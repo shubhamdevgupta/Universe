@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AlankitUniverse</string>
+
+    <string name="no_internet_message">App is enable to access your network connection, make sure your device has sufficient connection</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="dialog_permission_title">Grant Permissions</string>
+    <string name="go_to_settings">GOTO SETTINGS</string>
+</resources>

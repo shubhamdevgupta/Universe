@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_www_alankit"
+        android:icon="@drawable/ic_website"
+        android:title="www_alankit.com" />
+
+    <item
+        android:id="@+id/nav_about_us"
+        android:icon="@drawable/ic_about"
+        android:title="About Us" />
+
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_email_us"
+                android:icon="@drawable/ic_email"
+                android:title="Email Us" />
+
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_email"
+                android:title="FeedBack" />
+
+            <item
+                android:id="@+id/nav_letterbox"
+                android:icon="@drawable/ic_letterbox"
+                android:title="Letter Box" />
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share_us"
+                android:title="Share" />
+        </menu>
+    </item>
+
+</menu>
