@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface MainService {
     // TODO:  login url will be here
-    @POST("Login")
+    @POST("api/login/Checklogin")
     suspend fun appLogin(@Body param: JsonObject): Response<LoginResponse>
 
 }

@@ -11,6 +11,7 @@ class ApiData constructor(
 ) {
 
     var deviceId = ""
+
     init {
         val testingDeviceId = "5e6acbe01acbc591"
         //  deviceId = testingDeviceId
@@ -21,7 +22,7 @@ class ApiData constructor(
     fun data(dataMap: HashMap<String, String>? = null): JsonObject {
 
         return if (dataMap != null) {
-            
+
             dataMap["empId"] = appPreference.employeeID
             dataMap["password"] = appPreference.password
             dataMap["deviceid"] = deviceId

@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.alankituniverse.R
 import com.example.alankituniverse.databinding.ActivityDashboardBinding
-import com.example.alankituniverse.ui.activity.Ehrms.EhrmsLoginActivity
 import com.example.alankituniverse.util.helper.makeToast
 
 class DashboardActivity : AppCompatActivity() {
@@ -42,7 +41,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun eHrmsLogin() {
-        val intent = Intent(this, EhrmsLoginActivity::class.java)
+        val intent = Intent(this, EhrmsMainActivity::class.java)
         startActivity(intent)
     }
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_ehrms"
+    app:startDestination="@id/loginEhrmsFragment">
+
+
+    <fragment
+        android:id="@+id/loginEhrmsFragment"
+        android:name="com.example.alankituniverse.ui.fragment.Ehrms.LoginEhrmsFragment"
+        android:label="fragment_login_ehrms"
+        tools:layout="@layout/fragment_login_ehrms">
+        <action
+            android:id="@+id/action_loginEhrmsFragment_to_dashboardEhrmsFragment"
+            app:destination="@id/dashboardEhrmsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardEhrmsFragment"
+        android:name="com.example.alankituniverse.ui.fragment.Ehrms.DashboardEhrmsFragment"
+        android:label="DashboardEhrmsFragment" />
+</navigation>

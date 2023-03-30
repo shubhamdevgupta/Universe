@@ -5,4 +5,4 @@ import com.example.alankituniverse.data.model.User
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class LoginResponse(val status: Int, val message: String, val user: User) : Parcelable
+data class LoginResponse(val Status: Int, val Message: String, val Data: User) : Parcelable

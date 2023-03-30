@@ -1,7 +1,7 @@
 package com.example.alankituniverse.util.helper
 
 object AppConstants {
-    // TODO: Base Url Will be here
-    const val BASE_URL = "http://www.abc.com/"
+
+    const val BASE_URL = "http://alankit.net/AlankitUniverseapi/"
     const val EMPTY = ""
 }

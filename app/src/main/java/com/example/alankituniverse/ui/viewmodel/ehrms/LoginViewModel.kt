@@ -1,10 +1,14 @@
-package com.example.alankituniverse.ui.viewmodel
+package com.example.alankituniverse.ui.viewmodel.ehrms
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.alankituniverse.data.local.AppPreference
+import com.example.alankituniverse.data.model.User
 import com.example.alankituniverse.data.response.LoginResponse
 import com.example.alankituniverse.data.respository.MainRepository
+import com.example.alankituniverse.ui.viewmodel.BaseViewModel
 import com.example.alankituniverse.util.api.Resource
 import com.example.alankituniverse.util.extns.toGsonJsonObject
 import com.example.alankituniverse.util.helper.AppConstants
@@ -16,24 +20,28 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val mainRepository: MainRepository) :
+class LoginViewModel @Inject constructor(
+    private val mainRepository: MainRepository,
+    private val appPreference: AppPreference
+) :
     BaseViewModel() {
     var empId = AppConstants.EMPTY
     var password = AppConstants.EMPTY
 
     var errorMsgObserver = MutableLiveData(AppConstants.EMPTY)
 
+    init {
+        empId = appPreference.employeeID
+        password = appPreference.password
+    }
+
     private val _loginObserver = SingleLiveData<Resource<LoginResponse>>()
     val loginResponse: SingleLiveData<Resource<LoginResponse>>
         get() = _loginObserver
 
-    init {
-
-    }
-
     fun onSubmitClick(view: View) {
         errorMsgObserver.value = AppConstants.EMPTY
-        // if (!validateLoginInput()) return@onSubmitClick
+        if (!validateLoginInput()) return@onSubmitClick
         _loginObserver.value = Resource.Loading<Nothing>()
 // TODO: change the parameter here  
         viewModelScope.launch {
@@ -42,14 +50,15 @@ class LoginViewModel @Inject constructor(private val mainRepository: MainReposit
                     apiRequest {
                         mainRepository.appLogin(
                             hashMapOf(
-                                "employee code" to empId,
-                                "password" to password
+                                "Ssn" to empId,
+                                "Pass" to password
                             ).toGsonJsonObject()
                         )
                     }
                 }
+                setLoginCheck(response)
+                Log.d("MYTAG", "onSubmitClick: " + response)
                 _loginObserver.value = Resource.Success(response)
-
             } catch (e: Exception) {
                 _loginObserver.value = Resource.Failure(e)
             }
@@ -57,12 +66,26 @@ class LoginViewModel @Inject constructor(private val mainRepository: MainReposit
     }
 
     fun validateLoginInput(): Boolean {
-        val message = if (!empId.isEmpty()) {
-            if (!password.isEmpty()) {
+        val message = if (empId.isNotEmpty()) {
+            if (password.isNotEmpty()) {
                 return true
             } else "Please Enter Your Password"
         } else "Please Enter Employee ID"
         errorMsgObserver.value = message
+        Log.d("MYTAG", "validateLoginInput: " + errorMsgObserver.value)
         return false
     }
+
+    private fun setLoginCheck(response: LoginResponse) {
+        appPreference.employeeID = AppConstants.EMPTY
+        appPreference.password = AppConstants.EMPTY
+        appPreference.user = User()
+
+        if (response.Status == 1) {
+            appPreference.employeeID = empId
+            appPreference.password = password
+            appPreference.user = response.Data
+        }
+    }
+
 }

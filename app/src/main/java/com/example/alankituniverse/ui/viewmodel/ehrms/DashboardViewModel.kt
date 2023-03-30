@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class EhrmsViewModel @Inject constructor(
+class DashboardViewModel @Inject constructor(
     private val respositry: MainRepository,
     private val apiData: ApiData,
     private val appPreference: AppPreference

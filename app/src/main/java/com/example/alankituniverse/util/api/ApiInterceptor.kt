@@ -36,8 +36,6 @@ class ApiInterceptor @Inject constructor(
     private fun headerInterceptor(chain: Interceptor.Chain): Request {
         var request = chain.request()
         request = request.newBuilder()
-            .addHeader("Content-Type", "application/json")
-            .addHeader("Accept", "application/json")
             .build()
         return request
     }
