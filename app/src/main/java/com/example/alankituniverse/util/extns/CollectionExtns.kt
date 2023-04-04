@@ -1,14 +1,13 @@
 package com.example.alankituniverse.util.extns
 
 import com.google.gson.Gson
-import com.google.gson.JsonObject
+import org.json.JSONObject
 
 //toGsonJsonObject
-fun HashMap<String, String>.toGsonJsonObject(): JsonObject {
+fun HashMap<String, String>.toGsonJsonObject(): JSONObject {
     val gsonStringData = Gson().toJson(this).toString()
-    val jsonObject = JsonObject()
-    // TODO: change the parameter here when send the request to the server 
-    jsonObject.addProperty("string", gsonStringData)
+    val jsonObject = JSONObject(gsonStringData)
+    // TODO: change the parameter here when send the request to the server
 
     return jsonObject
 }

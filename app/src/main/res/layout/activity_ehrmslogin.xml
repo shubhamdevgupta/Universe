@@ -3,153 +3,149 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="com.example.alankituniverse.ui.viewmodel.ehrms.LoginViewModel" />
-    </data>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/sv_root"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/ll_main_container"
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/app_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/wave_bg"
-            android:orientation="vertical">
+            android:layout_gravity="start"
+            android:background="@color/drawer_bg"
+            app:headerLayout="@layout/nav_header_ehrms"
+            app:menu="@menu/ehrms_drawer" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="24dp"
-                android:text="Login to your \nAccount"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="15dp"
-                app:cardCornerRadius="34dp"
-                app:cardElevation="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:id="@+id/iv_main"
-                        android:layout_width="match_parent"
-                        android:layout_height="220dp"
-                        android:src="@drawable/bg_login" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/styleTextInputLayout"
-                        app:boxBackgroundColor="@color/lightgrey"
-                        app:startIconDrawable="@drawable/baseline_person_24">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Employee Code"
-                            android:inputType="number"
-                            android:text="@={viewModel.empId}" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/styleTextInputLayout"
-                        android:background="@color/white"
-                        app:boxBackgroundColor="@color/lightgrey"
-                        app:startIconDrawable="@drawable/baseline_lock_24">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Password"
-                            android:inputType="textPassword"
-                            android:text="@={viewModel.password}">
-
-                        </com.google.android.material.textfield.TextInputEditText>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        style="@style/ValidationErrorStyle"
-                        android:background="@color/validation_error"
-                        android:text="@{viewModel.errorMsgObserver}"
-                        android:visibility="@{viewModel.errorMsgObserver == `` ? View.GONE : View.VISIBLE}" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_login"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:onClick="@{viewModel::onSubmitClick}"
-                            android:text="Submit"
-                            app:backgroundTint="@color/btnColor" />
-
-                        <include
-                            android:id="@+id/progress_layout"
-                            layout="@layout/circular_progress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:visibility="invisible" />
-
-                    </RelativeLayout>
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+        <!--<androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/main_fragment_container"
+                android:id="@+id/ll_main_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:background="@drawable/wave_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Login to your \nAccount"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="15dp"
+                    app:cardCornerRadius="34dp"
+                    app:cardElevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_main"
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp"
+                            android:src="@drawable/bg_login" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/styleTextInputLayout"
+                            app:boxBackgroundColor="@color/lightgrey"
+                            app:startIconDrawable="@drawable/baseline_person_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Employee Code"
+                                android:inputType="number"
+                                android:text="@={viewModel.empId}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/styleTextInputLayout"
+                            android:background="@color/white"
+                            app:boxBackgroundColor="@color/lightgrey"
+                            app:startIconDrawable="@drawable/baseline_lock_24">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Password"
+                                android:inputType="textPassword"
+                                android:text="@={viewModel.password}">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/ValidationErrorStyle"
+                            android:background="@color/validation_error"
+                            android:text="@{viewModel.errorMsgObserver}"
+                            android:visibility="@{viewModel.errorMsgObserver == `` ? View.GONE : View.VISIBLE}" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_login"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:onClick="@{viewModel::onSubmitClick}"
+                                android:text="Submit"
+                                app:backgroundTint="@color/btnColor" />
+
+                            <include
+                                android:id="@+id/progress_layout"
+                                layout="@layout/circular_progress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:visibility="invisible" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/main_fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-    <!--    <androidx.drawerlayout.widget.DrawerLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <com.google.android.material.navigation.NavigationView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:background="@color/white"
-                android:fitsSystemWindows="true">
-                <include
-                     />
-
-            </com.google.android.material.navigation.NavigationView>
-
-        </androidx.drawerlayout.widget.DrawerLayout>-->
-
+        </androidx.core.widget.NestedScrollView>-->
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
+
+
 
 
 

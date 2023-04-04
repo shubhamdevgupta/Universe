@@ -10,6 +10,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="card_bg">#CFDCFF</color>
     <color name="grey">#808080</color>
+    <color name="greyLight">#99808080</color>
     <color name="lightgrey">#3EC8C3C3</color>
     <color name="btnColor">#2C60DE</color>
     <color name="red">#E53935</color>
@@ -25,6 +26,7 @@
     <color name="black">#000000</color>
     <color name="black30">#4d4d4d</color>
     <color name="black50">#B3ACAC</color>
+    <color name="drawer_bg">#EFF3FF</color>
 
 
     <!--white color-->

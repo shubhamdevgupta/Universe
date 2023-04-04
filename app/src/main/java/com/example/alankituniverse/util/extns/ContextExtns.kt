@@ -10,32 +10,33 @@ import com.example.alankituniverse.util.api.Exceptions
 import java.net.SocketTimeoutException
 
 fun Context.launchActivity(
-    clazz: Class<*>, bundle: Bundle? = null, forogtAll: Boolean = false
+    clazz: Class<*>, bundle: Bundle? = null, forgotAll: Boolean = false
 ) {
     val intent: Intent = Intent(this, clazz)
     bundle?.let {
         intent.putExtras(it)
     }
-    if (forogtAll) intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    if (forgotAll) intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     startActivity(intent)
 }
 
-fun Context.handelNetworkFailure(e: Exception, goBack: Boolean = true) {
+fun Context.handleNetworkFailure(e: Exception, goBack: Boolean = true) {
     when (e) {
         is Exceptions.NoInternetException -> launchActivity(
             ErrorActivity::class.java, bundleOf(
                 ErrorActivity.TYPE to ErrorActivity.NETWORK_EXCEPTION,
                 ErrorActivity.TITLE to e.message,
                 ErrorActivity.DESCRIPTION to resources.getString(R.string.no_internet_message),
-                ErrorActivity.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.NO_INTERNET
+                ErrorActivity.NetworkExceptions.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.NO_INTERNET
             )
         )
         is Exceptions.UnAuthorizedException -> launchActivity(
             ErrorActivity::class.java, bundleOf(
                 ErrorActivity.TYPE to ErrorActivity.NETWORK_EXCEPTION,
+                ErrorActivity.ACTION to ErrorActivity.NAVIGATE_TO_LOGIN,
                 ErrorActivity.TITLE to "User Unauthorized",
                 ErrorActivity.DESCRIPTION to e.message,
-                ErrorActivity.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.UNAUTHORIZED
+                ErrorActivity.NetworkExceptions.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.UNAUTHORIZED
             )
         )
         is Exceptions.InternalServerError -> launchActivity(
@@ -43,25 +44,24 @@ fun Context.handelNetworkFailure(e: Exception, goBack: Boolean = true) {
                 ErrorActivity.TYPE to ErrorActivity.NETWORK_EXCEPTION,
                 ErrorActivity.TITLE to "Internal Server Error",
                 ErrorActivity.DESCRIPTION to e.message,
-                ErrorActivity.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.INTERNAL_SERVER_ERROR
-
+                ErrorActivity.NetworkExceptions.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.INTERNAL_SERVER_ERROR
             )
         )
-
-        is SocketTimeoutException -> launchActivity(
-            ErrorActivity::class.java, bundleOf(
-                ErrorActivity.TYPE to ErrorActivity.NETWORK_EXCEPTION,
-                ErrorActivity.TITLE to "Timeout",
-                ErrorActivity.DESCRIPTION to "Please try again!!",
-                ErrorActivity.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.TIME_OUT_EXCEPTION
+        is SocketTimeoutException ->
+            launchActivity(
+                ErrorActivity::class.java, bundleOf(
+                    ErrorActivity.TYPE to ErrorActivity.NETWORK_EXCEPTION,
+                    ErrorActivity.TITLE to "Timeout",
+                    ErrorActivity.DESCRIPTION to "Please try again!!",
+                    ErrorActivity.NetworkExceptions.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.TIME_OUT_EXCEPTION
+                )
             )
-        )
         else -> launchActivity(
             ErrorActivity::class.java, bundleOf(
                 ErrorActivity.TYPE to ErrorActivity.NETWORK_EXCEPTION,
-                ErrorActivity.TITLE to "Something went wrong Please Try Again!!",
+                ErrorActivity.TITLE to "Something went wrong! Please try again",
                 ErrorActivity.DESCRIPTION to e.message,
-                ErrorActivity.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.OTHER
+                ErrorActivity.NetworkExceptions.NETWORK_EXCEPTION_TYPE to ErrorActivity.NetworkExceptions.OTHER
             )
         )
     }

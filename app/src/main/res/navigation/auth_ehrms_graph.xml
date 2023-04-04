@@ -18,5 +18,10 @@
     <fragment
         android:id="@+id/dashboardEhrmsFragment"
         android:name="com.example.alankituniverse.ui.fragment.Ehrms.DashboardEhrmsFragment"
-        android:label="DashboardEhrmsFragment" />
+        android:label="DashboardEhrmsFragment"
+        tools:layout="@layout/fragment_dashboard_ehrms">
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
 </navigation>

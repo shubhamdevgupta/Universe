@@ -26,8 +26,10 @@ class ApiInterceptor @Inject constructor(
         val mainResponse: Response = chain.proceed(request)
         when (mainResponse.code) {
             401, 403 ->
-                throw Exceptions.UnAuthorizedException("User UnAuthorized - token expired or may you have logged " +
-                        "in another device. code ${mainResponse.code}")
+                throw Exceptions.UnAuthorizedException(
+                    "User UnAuthorized - token expired or may you have logged " +
+                            "in another device. code ${mainResponse.code}"
+                )
             500 -> throw Exceptions.InternalServerError("Internal server error, it will resolve soon")
             else -> return mainResponse
         }
@@ -36,6 +38,8 @@ class ApiInterceptor @Inject constructor(
     private fun headerInterceptor(chain: Interceptor.Chain): Request {
         var request = chain.request()
         request = request.newBuilder()
+            .addHeader("Content-Type", "application/json")
+            .addHeader("Accept", "application/json")
             .build()
         return request
     }

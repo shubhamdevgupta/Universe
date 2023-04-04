@@ -4,7 +4,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
@@ -20,6 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun View.show() {
     this.visibility = View.VISIBLE
@@ -76,8 +79,12 @@ enum class LottieType {
 }
 
 
-fun ViewGroup.setChildAlpha(visibility: Boolean = true, exceptView: View? = null,alpha : Float = 0.5f) {
-    EnableWithAlpha(this, visibility, exceptView,alpha)
+fun ViewGroup.setChildAlpha(
+    visibility: Boolean = true,
+    exceptView: View? = null,
+    alpha: Float = 0.5f
+) {
+    EnableWithAlpha(this, visibility, exceptView, alpha)
 }
 
 
@@ -85,12 +92,12 @@ private class EnableWithAlpha(
     viewGroup: ViewGroup,
     visibility: Boolean,
     exceptView: View?,
-    alpha : Float
+    alpha: Float
 ) {
     init {
         viewGroup.forEach { thisChild ->
             when (thisChild) {
-                is CardView -> disablingCardView(visibility, thisChild, exceptView,alpha)
+                is CardView -> disablingCardView(visibility, thisChild, exceptView, alpha)
                 is RecyclerView -> {
                     if (visibility) thisChild.show()
                     else thisChild.hide()
@@ -103,27 +110,36 @@ private class EnableWithAlpha(
                                 exceptView = exceptView,
                                 alpha = alpha
                             )
-                    } ?: thisChild.setChildAlpha(visibility = visibility, exceptView = null,alpha = alpha)
+                    } ?: thisChild.setChildAlpha(
+                        visibility = visibility,
+                        exceptView = null,
+                        alpha = alpha
+                    )
                 }
                 else -> {
                     exceptView?.let {
                         if (thisChild.id != it.id)
-                            setVisibility(visibility, thisChild,alpha)
+                            setVisibility(visibility, thisChild, alpha)
                     } ?: run {
-                        setVisibility(visibility, thisChild,alpha)
+                        setVisibility(visibility, thisChild, alpha)
                     }
                 }
             }
         }
     }
 
-    private fun disablingCardView(visibility: Boolean, cardView: CardView, exceptView: View?,alpha: Float) {
+    private fun disablingCardView(
+        visibility: Boolean,
+        cardView: CardView,
+        exceptView: View?,
+        alpha: Float
+    ) {
         if (cardView.childCount == 0)
             exceptView?.let { _ ->
                 if (cardView.id != exceptView.id)
-                    setVisibility(visibility, cardView,alpha)
+                    setVisibility(visibility, cardView, alpha)
             } ?: run {
-                setVisibility(visibility, cardView,alpha)
+                setVisibility(visibility, cardView, alpha)
             }
         else if (cardView.childCount == 1) {
             cardView.forEach { cardViewChild ->
@@ -135,20 +151,30 @@ private class EnableWithAlpha(
                                 exceptView = exceptView,
                                 alpha = alpha
                             )
-                    } ?: cardViewChild.setChildAlpha(visibility = visibility, exceptView = null,alpha = alpha)
+                    } ?: cardViewChild.setChildAlpha(
+                        visibility = visibility,
+                        exceptView = null,
+                        alpha = alpha
+                    )
                 } else {
                     exceptView?.let { _ ->
                         if (cardViewChild.id != exceptView.id)
-                            setVisibility(visibility, cardViewChild,alpha)
+                            setVisibility(visibility, cardViewChild, alpha)
                     } ?: run {
-                        setVisibility(visibility, cardViewChild,alpha)
+                        setVisibility(visibility, cardViewChild, alpha)
                     }
                 }
             }
         }
     }
 
-    private fun setVisibility(value: Boolean, view: View,alpha: Float) {
+    fun getCurrentDate() {
+        val sdf = SimpleDateFormat("yyyy/mm/dd")
+        val currentDate = sdf.format(Date())
+    }
+
+
+    private fun setVisibility(value: Boolean, view: View, alpha: Float) {
         if (value) {
             view.alpha = 1f
             view.isEnabled = true
@@ -166,45 +192,46 @@ fun ImageView.setGlideImage(imgUrl: String?, delaySecond: Int = 0) {
     val imageView: ImageView = this
 
 
-   if(imgUrl !=null){
-       Glide.with(this.context)
-           .load(imgUrl)
-           .listener(object : RequestListener<Drawable> {
-               override fun onLoadFailed(
-                   e: GlideException?,
-                   model: Any?,
-                   target: Target<Drawable>?,
-                   isFirstResource: Boolean
-               ): Boolean {
+    if (imgUrl != null) {
+        Glide.with(this.context)
+            .load(imgUrl)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
 
-                   GlobalScope.launch(Dispatchers.Main) {
-                       delay(delaySecond.toLong() * 1000)
-                       imageView.setImageDrawable(
-                           ContextCompat.getDrawable(
-                               imageView.context,
-                               R.drawable.no_photo
-                           )
-                       )
-                   }
-                   return true
-               }
-               override fun onResourceReady(
-                   resource: Drawable?,
-                   model: Any?,
-                   target: Target<Drawable>?,
-                   dataSource: DataSource?,
-                   isFirstResource: Boolean
-               ): Boolean {
-                   GlobalScope.launch(Dispatchers.Main) {
-                       delay(delaySecond.toLong() * 1000)
-                       imageView.setImageDrawable(resource)
-                   }
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(delaySecond.toLong() * 1000)
+                        imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.no_photo
+                            )
+                        )
+                    }
+                    return true
+                }
 
-                   return true
-               }
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(delaySecond.toLong() * 1000)
+                        imageView.setImageDrawable(resource)
+                    }
 
-           }).submit()
-   }
+                    return true
+                }
+
+            }).submit()
+    }
 }
 /*
 

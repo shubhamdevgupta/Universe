@@ -8,4 +8,6 @@ object Exceptions {
     class UnAuthorizedException(message: String) : IOException(message)
     class InternalServerError(message: String) : IOException(message)
 
+
+
 }

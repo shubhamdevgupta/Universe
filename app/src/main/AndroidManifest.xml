@@ -20,17 +20,20 @@
         android:theme="@style/Theme.AlankitUniverse"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.activity.ehrms.AuthActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.ErrorActivity"
             android:exported="false" />
-        <activity android:name=".ui.activity.EhrmsMainActivity" />
+        <activity android:name=".ui.activity.ehrms.EhrmsMainActivity" />
         <activity
             android:name=".ui.activity.DashboardActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

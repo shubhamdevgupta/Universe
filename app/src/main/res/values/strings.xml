@@ -8,4 +8,7 @@
 
     <string name="dialog_permission_title">Grant Permissions</string>
     <string name="go_to_settings">GOTO SETTINGS</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

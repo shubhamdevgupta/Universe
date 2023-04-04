@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_leave"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="Leave Application" />
+
+    <item
+        android:id="@+id/nav_application_status"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="Application Status" />
+
+    <item
+        android:id="@+id/nav_onduty"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="On Duty" />
+    <item
+        android:id="@+id/nav_field_duty"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="Field Duty" />
+    <item
+        android:id="@+id/nav_apply_conv"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="Apply Convence" />
+    <item
+        android:id="@+id/nav_extra_work"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="Extra Working" />
+    <item
+        android:id="@+id/nav_employee_gate"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="Employee Gatepass" />
+    <item
+        android:id="@+id/nav_hod_approv"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="Hod Approval" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/baseline_arrow_forward_ios_24"
+        android:title="logout" />
+</menu>

@@ -3,7 +3,7 @@ package com.example.alankituniverse.util.helper
 import android.content.Context
 import com.example.alankituniverse.data.local.AppPreference
 import com.example.alankituniverse.util.extns.toGsonJsonObject
-import com.google.gson.JsonObject
+import org.json.JSONObject
 
 class ApiData constructor(
     context: Context,
@@ -19,7 +19,7 @@ class ApiData constructor(
     }
 
     // TODO: change the parameter 
-    fun data(dataMap: HashMap<String, String>? = null): JsonObject {
+    fun data(dataMap: HashMap<String, String>? = null): JSONObject {
 
         return if (dataMap != null) {
 

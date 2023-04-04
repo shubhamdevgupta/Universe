@@ -10,12 +10,12 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 // TODO: use parcelize annotation for their correct name 
 data class User(
-    @SerializedName("employeeID")
-    val empID: Int = 0,
-    @SerializedName("userName")
+    @SerializedName("SSN")
+    val empID: String = AppConstants.EMPTY,
+    @SerializedName("NAME")
     val userName: String = AppConstants.EMPTY,
-    val profilePic: String = AppConstants.EMPTY,
-    val eLeave: String = AppConstants.EMPTY,
-    val mLeave: String = AppConstants.EMPTY,
-    val cLeave: String = AppConstants.EMPTY
+    @SerializedName("SalMsg")
+    val loginMessage: String = AppConstants.EMPTY,
+    @SerializedName("LastLogin")
+    val lastLogin: String = AppConstants.EMPTY
 ) : Parcelable

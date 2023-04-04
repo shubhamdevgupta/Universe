@@ -1,55 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="12dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="gpList"
+            type="com.example.alankituniverse.data.response.GatePass" />
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="270dp"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp">
 
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/TextViewStyle"
-            android:drawableStart="@drawable/baseline_person_24"
-            android:text="Shubham Gupta"
-            android:textAllCaps="true" />
-
-        <TextView
-            android:id="@+id/tv_empId"
-            style="@style/TextViewStyle"
-            android:drawableStart="@drawable/round_featured_play_list_24"
-            android:text="25608" />
-
-        <TextView
-            android:id="@+id/tv_location"
-            style="@style/TextViewStyle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:drawableStart="@drawable/baseline_location_on_24"
-            android:text="Supreme Court" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_purpose"
-            style="@style/TextViewStyle"
-            android:drawableStart="@drawable/baseline_purpose_24"
-            android:text="Bank Account Opening" />
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/TextViewStyle"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:hint="Shubham Gupta"
+                android:text="@{gpList.userName}"
+                android:textAllCaps="true" />
 
-        <TextView
-            android:id="@+id/tv_date"
-            style="@style/TextViewStyle"
-            android:drawableStart="@drawable/baseline_date_range_24"
-            android:text="23 Mar 2023 02:17 PM" />
+            <TextView
+                android:id="@+id/tv_empId"
+                style="@style/TextViewStyle"
+                android:drawableStart="@drawable/round_featured_play_list_24"
+                android:hint="25608"
+                android:text="@{gpList.empID}" />
 
-        <TextView
-            android:id="@+id/tv_status"
-            style="@style/TextViewStyle"
-            android:drawableStart="@drawable/baseline_downloading_24"
-            android:text="Approved" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_location"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:drawableStart="@drawable/baseline_location_on_24"
+                android:hint="Supreme Court"
+                android:text="@{gpList.location}" />
+
+            <TextView
+                android:id="@+id/tv_purpose"
+                style="@style/TextViewStyle"
+                android:drawableStart="@drawable/baseline_purpose_24"
+                android:hint="Bank Account Opening"
+                android:text="@{gpList.purpose}" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/TextViewStyle"
+                android:drawableStart="@drawable/baseline_date_range_24"
+                android:hint="23 Mar 2023 02:17 PM"
+                android:text="@{gpList.dateTime}" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                style="@style/TextViewStyle"
+                android:drawableStart="@drawable/baseline_downloading_24"
+                android:hint="Approved"
+                android:text="@{gpList.gatePassStatus}" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
+
 
